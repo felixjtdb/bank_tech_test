@@ -1,0 +1,10 @@
+AllCops:
+  Exclude:
+    # This code was taken from the backports gem. We don't want to mess with it.
+    - rspec/spec_helper.rb
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/BlockLength:
+  Max: 100

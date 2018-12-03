@@ -1,7 +1,8 @@
-# A class for a bank account, it allows deposits and withdrawls.
+# Account class
 class Account
   attr_reader :balance, :interactions
-  HEADER = "DATE || CREDIT || DEBIT || BALANCE"
+  HEADER = 'DATE || CREDIT || DEBIT || BALANCE'.freeze
+
   def initialize
     @balance = 0
     @interactions = []
@@ -9,12 +10,12 @@ class Account
 
   def deposit(amount)
     @balance += amount
-    @interactions.push({timestamp: Time.now.to_s, balance: @balance, credit: amount, debit: ""})
+    @interactions.push(timestamp: Time.now.to_s, balance: @balance, credit: amount, debit: nil)
   end
 
   def withdrawl(amount)
     @balance -= amount
-    @interactions.push({timestamp: Time.now.to_s, balance: @balance, credit: "", debit: amount})
+    @interactions.push(timestamp: Time.now.to_s, balance: @balance, credit: nil, debit: amount)
   end
 
   def statement
