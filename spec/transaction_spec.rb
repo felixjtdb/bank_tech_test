@@ -21,6 +21,6 @@ describe Transaction do
   end
 
   it 'raises error if action is not valid' do
-    expect{ described_class.create('Invalid Action', 10, 100) }.to raise_error('Unknown action')
+    expect { described_class.create('Invalid Action', 10, 100) }.to raise_error('Unknown action')
   end
 end

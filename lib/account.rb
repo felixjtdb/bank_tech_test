@@ -10,8 +10,8 @@ class Account
     @interactions = []
   end
 
-  def view_balance()
-    return '%.2f' % @balance
+  def view_balance
+    format('%.2f', @balance)
   end
 
   def interact(action, amount)
@@ -22,7 +22,10 @@ class Account
   def statement
     puts HEADER
     @interactions.reverse_each do |x|
-      puts "#{x[:timestamp]} || #{'%.2f' % x[:credit]} || #{'%.2f' % x[:debit]} || #{'%.2f' % x[:balance]}"
+      formatted_credit = format('%.2f', x[:credit])
+      formatted_debit = format('%.2f', x[:debit])
+      formatted_balance = format('%.2f', x[:balance])
+      puts "#{x[:timestamp]} || #{formatted_credit} || #{formatted_debit} || #{formatted_balance}"
     end
   end
 end
