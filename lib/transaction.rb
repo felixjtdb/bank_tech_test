@@ -4,10 +4,10 @@ class Transaction
     case action
     when 'Deposit'
       balance += amount
-      { timestamp: Time.now.to_s, credit: amount, debit: nil, balance: balance }
+      { timestamp: Time.now, credit: amount, debit: 0, balance: balance }
     when 'Withdrawl'
       balance -= amount
-      { timestamp: Time.now.to_s, credit: nil, debit: amount, balance: balance }
+      { timestamp: Time.now, credit: 0 , debit: amount, balance: balance }
     else
       raise 'Unknown action'
     end

@@ -10,7 +10,7 @@ describe Account do
   describe 'deposit' do
     it 'A deposit increases the balance' do
       a.interact('Deposit', 10.00)
-      expect(a.balance).to eq 10.00
+      expect(a.view_balance).to eq "10.00"
     end
 
     it 'deposits have a timestamp when created' do
@@ -22,7 +22,7 @@ describe Account do
 
   describe 'withdrawl' do
     it 'withdrawls decrease the balance' do
-      expect { a.interact('Withdrawl', 10.00) }.to change { a.balance }.by(-10.00)
+      expect { a.interact('Withdrawl', 10.00) }.to change { a.balance }.by(-10)
     end
     it 'withdrawls decrease the balance' do
       allow(Time).to receive(:now).and_return('correct')
@@ -37,7 +37,7 @@ describe Account do
       allow(Time).to receive(:now).and_return('testing123')
       x.interact('Deposit', 9.00)
       header = "DATE || CREDIT || DEBIT || BALANCE\n"
-      expected_statement = "testing123 || 9.00 ||  || 9.00\n"
+      expected_statement = "testing123 || 9.00 || 0.00 || 9.00\n"
       expect { x.statement }.to output(header + expected_statement).to_stdout
     end
   end
