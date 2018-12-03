@@ -1,21 +1,18 @@
+require_relative 'transaction'
+
 # Account class
 class Account
   attr_reader :balance, :interactions
   HEADER = 'DATE || CREDIT || DEBIT || BALANCE'.freeze
 
   def initialize
-    @balance = 0
+    @balance = 0.00
     @interactions = []
   end
 
-  def deposit(amount)
-    @balance += amount
-    @interactions.push(timestamp: Time.now.to_s, balance: @balance, credit: amount, debit: nil)
-  end
-
-  def withdrawl(amount)
-    @balance -= amount
-    @interactions.push(timestamp: Time.now.to_s, balance: @balance, credit: nil, debit: amount)
+  def interact(action, amount)
+    @interactions << Transaction.create(action, amount, @balance)
+    @balance = interactions.last[:balance]
   end
 
   def statement

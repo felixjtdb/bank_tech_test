@@ -1,11 +1,13 @@
 # Transaction class
 class Transaction
-  def self.create(action, amount)
+  def self.create(action, amount, balance)
     case action
     when 'Deposit'
-      { timestamp: Time.now.to_s, credit: amount, debit: nil }
+      balance += amount
+      { timestamp: Time.now.to_s, credit: amount, debit: nil, balance: balance }
     when 'Withdrawl'
-      { timestamp: Time.now.to_s, credit: nil, debit: amount }
+      balance -= amount
+      { timestamp: Time.now.to_s, credit: nil, debit: amount, balance: balance }
     else
       raise 'Unknown action'
     end
