@@ -16,7 +16,7 @@ describe Account do
     it 'deposits have a timestamp when created' do
       allow(Time).to receive(:now).and_return('pass')
       a.interact('Deposit', 20)
-      expect(a.interactions.last[:timestamp]).to eq 'pass'
+      expect(a.transactions.last[:timestamp]).to eq 'pass'
     end
   end
 
@@ -27,12 +27,12 @@ describe Account do
     it 'withdrawls decrease the balance' do
       allow(Time).to receive(:now).and_return('correct')
       a.interact('Withdrawl', 10)
-      expect(a.interactions.last[:timestamp]).to eq 'correct'
+      expect(a.transactions.last[:timestamp]).to eq 'correct'
     end
   end
 
   describe 'statement' do
-    it 'statement prints all interactions' do
+    it 'statement prints all transactions' do
       x = described_class.new
       allow(Time).to receive(:now).and_return('testing123')
       x.interact('Deposit', 9)
