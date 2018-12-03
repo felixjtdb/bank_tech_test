@@ -1,11 +1,11 @@
 require 'transaction'
 
 describe Transaction do
-  deposit_10 = { timestamp: "stubbed_time", credit: 10, debit: nil }
-  withdrawl_10 = { timestamp: "stubbed_time", credit: nil, debit: 10 }
+  deposit_ten = { timestamp: 'stubbed_time', credit: 10, debit: nil }
+  withdrawl_ten = { timestamp: 'stubbed_time', credit: nil, debit: 10 }
 
   before(:each) do
-    allow(Time).to receive(:now).and_return "stubbed_time"
+    allow(Time).to receive(:now).and_return 'stubbed_time'
   end
 
   it 'takes an action and an amount' do
@@ -13,10 +13,10 @@ describe Transaction do
   end
 
   it 'deposits return a hash with a credit value' do
-    expect(Transaction.create("Deposit", 10)).to eq(deposit_10)
+    expect(Transaction.create('Deposit', 10)).to eq(deposit_ten)
   end
 
   it 'withdrawls return a hash with a debit value' do
-    expect(described_class.create("Withdrawl", 10)).to eq(withdrawl_10)
+    expect(described_class.create('Withdrawl', 10)).to eq(withdrawl_ten)
   end
 end
