@@ -30,4 +30,15 @@ describe Account do
       expect(a.interactions.last[:timestamp]).to eq "correct"
     end
   end
+
+  describe "statement" do
+    it "statement prints all interactions" do
+      x = described_class.new
+      allow(Time).to receive(:now).and_return("testing123")
+      x.deposit(9)
+      header = "DATE || CREDIT || DEBIT || BALANCE\n"
+      expected_statement = "testing123 || 9 ||  || 9\n"
+      expect { x.statement }.to output(header + expected_statement).to_stdout
+    end
+  end
 end
