@@ -1,14 +1,19 @@
 # A class for a bank account, it allows deposits and withdrawls.
 class Account
-  attr_reader :balance, :deposits
+  attr_reader :balance, :interactions
 
   def initialize
     @balance = 0
-    @deposits = []
+    @interactions = []
   end
 
   def deposit(amount)
     @balance += amount
-    @deposits.push({:amount => amount, :timestamp => Time.now})
+    @interactions.push({amount: amount, timestamp: Time.now, balance: @balance})
+  end
+
+  def withdrawl(amount)
+    @balance -= amount
+    @interactions.push({amount: amount, timestamp: Time.now, balance: @balance})
   end
 end

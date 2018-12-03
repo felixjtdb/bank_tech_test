@@ -8,7 +8,7 @@ describe Account do
   end
 
   describe "deposit" do
-    it 'A deposit can be made' do
+    it 'A deposit increases the balance' do
       a.deposit(10)
       expect(a.balance).to eq 10
     end
@@ -16,7 +16,18 @@ describe Account do
     it "deposits have a timestamp when created" do
       allow(Time).to receive(:now).and_return("pass")
       a.deposit(20)
-      expect(a.deposits.last[:timestamp]).to eq "pass"
+      expect(a.interactions.last[:timestamp]).to eq "pass"
+    end
+  end
+
+  describe "withdrawl" do
+    it "withdrawls decrease the balance" do
+      expect{a.withdrawl(10)}.to change{a.balance}.by(-10)
+    end
+    it "withdrawls decrease the balance" do
+      allow(Time).to receive(:now).and_return("correct")
+      a.withdrawl(10)
+      expect(a.interactions.last[:timestamp]).to eq "correct"
     end
   end
 end
