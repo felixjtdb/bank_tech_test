@@ -14,8 +14,8 @@ class Account
     format('%.2f', @balance)
   end
 
-  def interact(action, amount)
-    @transactions << Transaction.create(action, amount, @balance)
+  def interact(action, amount, transaction_class = Transaction)
+    @transactions << transaction_class.create(action, amount, @balance)
     @balance = transactions.last.balance.to_i
   end
 
