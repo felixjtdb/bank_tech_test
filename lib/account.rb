@@ -1,9 +1,9 @@
 require_relative 'transaction'
+require_relative 'statement'
 
 # Account class
 class Account
   attr_reader :balance, :transactions
-  HEADER = 'DATE || CREDIT || DEBIT || BALANCE'.freeze
 
   def initialize
     @balance = 0.00
@@ -20,13 +20,6 @@ class Account
   end
 
   def statement
-    puts HEADER
-    @transactions.reverse_each do |transaction|
-      formatted_time = transaction.timestamp[0..10]
-      formatted_credit = format('%.2f', transaction.credit)
-      formatted_debit = format('%.2f', transaction.debit)
-      formatted_balance = format('%.2f', transaction.balance)
-      puts "#{formatted_time} || #{formatted_credit} || #{formatted_debit} || #{formatted_balance}"
-    end
+    print Statement.new(@transactions).print_a
   end
 end
