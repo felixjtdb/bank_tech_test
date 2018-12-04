@@ -13,11 +13,13 @@ describe Transaction do
   end
 
   it 'deposits return a hash with a credit value' do
-    expect(described_class.create('Deposit', 10, 0)).to eq(deposit_ten)
+    transaction = described_class.create('Deposit', 10, 0)
+    expect(transaction.credit).to eq(deposit_ten[:credit])
   end
 
   it 'withdrawls return a hash with a debit value' do
-    expect(described_class.create('Withdrawl', 10, 100)).to eq(withdrawl_ten)
+    transaction = described_class.create('Withdrawl', 10, 100)
+    expect(transaction.debit).to eq(withdrawl_ten[:debit])
   end
 
   it 'raises error if action is not valid' do

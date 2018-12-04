@@ -1,13 +1,22 @@
 # Transaction class
 class Transaction
+  attr_reader :debit, :credit, :balance, :timestamp
+
+  def initialize(credit, debit, balance)
+    @timestamp = Time.now
+    @credit = credit
+    @debit = debit
+    @balance = balance
+  end
+
   def self.create(action, amount, balance)
     case action
     when 'Deposit'
       balance += amount
-      { timestamp: Time.now, credit: amount, debit: 0, balance: balance }
+      Transaction.new(amount, 0, balance)
     when 'Withdrawl'
       balance -= amount
-      { timestamp: Time.now, credit: 0, debit: amount, balance: balance }
+      Transaction.new(0, amount, balance)
     else
       raise 'Unknown action'
     end

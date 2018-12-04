@@ -16,16 +16,17 @@ class Account
 
   def interact(action, amount)
     @transactions << Transaction.create(action, amount, @balance)
-    @balance = transactions.last[:balance].to_i
+    @balance = transactions.last.balance.to_i
   end
 
   def statement
     puts HEADER
-    @transactions.reverse_each do |x|
-      formatted_credit = format('%.2f', x[:credit])
-      formatted_debit = format('%.2f', x[:debit])
-      formatted_balance = format('%.2f', x[:balance])
-      puts "#{x[:timestamp]} || #{formatted_credit} || #{formatted_debit} || #{formatted_balance}"
+    @transactions.reverse_each do |transaction|
+      formatted_time = transaction.timestamp[0..10]
+      formatted_credit = format('%.2f', transaction.credit)
+      formatted_debit = format('%.2f', transaction.debit)
+      formatted_balance = format('%.2f', transaction.balance)
+      puts "#{formatted_time} || #{formatted_credit} || #{formatted_debit} || #{formatted_balance}"
     end
   end
 end
